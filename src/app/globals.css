@@ -1,0 +1,209 @@
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+
+  /* Azul institucional — tomado del isotipo (#0F2544) */
+  --brand-rgb: 15 37 68; /* #0F2544 */
+  --brand-dark-rgb: 10 26 49; /* #0A1A31 */
+  --brand-deep-rgb: 6 17 32; /* #061120 */
+  --brand-50-rgb: 238 242 247; /* #EEF2F7 */
+  --brand-100-rgb: 213 222 234; /* #D5DEEA */
+  --brand-200-rgb: 166 184 207; /* #A6B8CF */
+
+  /* Naranjo de marca — estrella y punto de origen */
+  --accent-rgb: 217 119 6; /* #D97706 */
+  --accent-dark-rgb: 180 95 3; /* #B45F03 */
+  --accent-light-rgb: 245 158 11; /* #F59E0B */
+  --accent-50-rgb: 255 245 232; /* #FFF5E8 */
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family:
+    var(--font-jakarta),
+    system-ui,
+    -apple-system,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Compensa la navbar fija al saltar a un ancla */
+section[id],
+article[id] {
+  scroll-margin-top: 96px;
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-[1200px] px-5 xl:px-0;
+  }
+
+  /* Píldora superior de sección: "Podemos ayudarte", "Servicios", etc. */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-xl border border-brand100 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-brand;
+  }
+
+  .eyebrow-light {
+    @apply inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-accent px-7 py-3.5 text-center text-sm font-extrabold tracking-wide text-white transition-colors hover:bg-accentDark;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-brand px-7 py-3.5 text-center text-sm font-extrabold tracking-wide text-white transition-colors hover:bg-brandDark;
+  }
+
+  .btn-outline-light {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white px-7 py-3 text-center text-sm font-extrabold tracking-wide text-white transition-colors hover:bg-white/10;
+  }
+
+  .btn-outline-dark {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-brand px-7 py-3 text-center text-sm font-extrabold tracking-wide text-brand transition-colors hover:bg-brand50;
+  }
+
+  .card-soft {
+    @apply rounded-2xl border border-brand100/70 bg-white p-6 shadow-[0_10px_30px_-18px_rgba(15,37,68,0.35)];
+  }
+}
+
+/* Malla sutil sobre fondos azules profundos */
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Brillo que recorre el CTA principal (tomado del patrón del sitio de referencia) */
+.cta-sheen {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cta-sheen::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  bottom: -30%;
+  left: -45%;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+  transform: skewX(-20deg) translateX(-180%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  animation: ctaSheen 3.6s ease-in-out infinite;
+}
+
+@keyframes ctaSheen {
+  0%,
+  70% {
+    opacity: 0;
+    transform: skewX(-20deg) translateX(-180%);
+  }
+  74% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: skewX(-20deg) translateX(430%);
+  }
+}
+
+/* Movimiento del fondo de marca del hero: se ve mientras no hay video cargado */
+.hero-grid-drift {
+  animation: gridDrift 26s linear infinite;
+}
+
+@keyframes gridDrift {
+  0% {
+    background-position:
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      56px 56px,
+      56px 56px;
+  }
+}
+
+.hero-halo {
+  animation: haloFloat 14s ease-in-out infinite;
+}
+
+.hero-halo-delayed {
+  animation-delay: -7s;
+}
+
+@keyframes haloFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(24px, -28px, 0) scale(1.12);
+    opacity: 1;
+  }
+}
+
+/* Trazo del isotipo dibujándose, para la opción con marca de agua animada */
+.isotype-draw {
+  stroke-dasharray: 60;
+  animation: isotypeDraw 9s ease-in-out infinite;
+}
+
+@keyframes isotypeDraw {
+  0% {
+    stroke-dashoffset: 60;
+  }
+  35%,
+  75% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -60;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-sheen::before,
+  .animate-floatSlow,
+  .animate-fadeInUp,
+  .hero-grid-drift,
+  .hero-halo,
+  .isotype-draw {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
