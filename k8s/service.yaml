@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: iniciachile-service
-  namespace: extras
+  namespace: apptec
 spec:
   type: ClusterIP
   selector:

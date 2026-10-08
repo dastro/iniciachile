@@ -185,7 +185,7 @@ Configuración del job **Pipeline from SCM**:
 - Plugins: Kubernetes, Git, GitHub, Pipeline: AWS Steps, AnsiColor y Workspace Cleanup.
 
 El agente debe tener acceso a Docker, ECR y a la API de Kubernetes, con permisos
-para crear/actualizar Deployment y Service en el namespace existente `extras`.
+para crear/actualizar Deployment y Service en el namespace existente `apptec`.
 Para ejecutar automáticamente con cada push, configura el webhook de GitHub hacia
 `<URL-de-Jenkins>/github-webhook/`, como en el job de referencia.
 

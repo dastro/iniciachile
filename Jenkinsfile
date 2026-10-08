@@ -33,7 +33,7 @@ pipeline {
         P_IMAGE_SUFFIX = 'prod'
         AWS_REGION = 'us-east-1'
 
-        DEPLOY_NAMESPACE = 'extras'
+        DEPLOY_NAMESPACE = 'apptec'
         DEPLOY_NAME = 'iniciachile'
     }
 

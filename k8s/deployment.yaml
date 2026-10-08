@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: iniciachile
-  namespace: extras
+  namespace: apptec
   labels:
     app: iniciachile
 spec:
