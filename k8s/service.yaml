@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: iniciachile-service
+  namespace: extras
+spec:
+  type: ClusterIP
+  selector:
+    app: iniciachile
+  ports:
+    - name: http
+      port: 80
+      targetPort: node

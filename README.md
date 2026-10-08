@@ -168,3 +168,37 @@ Las métricas son afirmaciones públicas: ajústalas a cifras que el estudio pue
 No corras `npm run build` con `npm run dev` encendido: el build sobrescribe `.next`
 y el dev server empieza a responder 500 (`Cannot find module './xxx.js'`).
 Si pasa, basta con `rm -rf .next` y reiniciar el dev server.
+
+
+## Jenkins
+
+El `Jenkinsfile` sigue el pipeline de `eleva-frontend-nextjs`: checkout de `main`,
+construcción de la imagen, publicación en ECR y despliegue en Kubernetes.
+
+Configuración del job **Pipeline from SCM**:
+
+- SCM: Git; repositorio `https://github.com/apptec-cl/iniciachile.git`.
+- Rama: `*/main`; Script Path: `Jenkinsfile`.
+- Credencial GitHub: `32045b55-4250-4757-9ab1-efff1b297fb4` (la del ejemplo).
+- Agente Kubernetes: cloud `k8-mobysuite`, plantilla `podman-builder`, contenedor `runner`.
+- Credencial AWS: `AWS-Mobysuite`, región `us-east-1`.
+- Plugins: Kubernetes, Git, GitHub, Pipeline: AWS Steps, AnsiColor y Workspace Cleanup.
+
+El agente debe tener acceso a Docker, ECR y a la API de Kubernetes, con permisos
+para crear/actualizar Deployment y Service en el namespace existente `extras`.
+Para ejecutar automáticamente con cada push, configura el webhook de GitHub hacia
+`<URL-de-Jenkins>/github-webhook/`, como en el job de referencia.
+
+Imágenes: `280458570481.dkr.ecr.us-east-1.amazonaws.com/apptec:iniciachile-X.Y.Z-prod`
+y `iniciachile-latest-prod`. El pipeline incrementa la versión patch desde ECR.
+
+Deployment: `iniciachile`; Service: `iniciachile-service`; puerto interno: `3000`.
+El Service es ClusterIP: el dominio/Ingress se configura por separado.
+El Dockerfile usa Node.js 22 y el servidor standalone de Next.js.
+
+Verificación local de la imagen:
+
+```bash
+docker build --platform linux/amd64 -f docker/production/Dockerfile -t iniciachile:local .
+docker run --rm -p 3000:3000 iniciachile:local
+```
