@@ -209,3 +209,6 @@ docker run --rm -p 3000:3000 iniciachile:local
 Después de un commit en `main`, revisar que Jenkins inicie una ejecución por el
 webhook de GitHub y que el checkout corresponda al SHA de ese commit. Un cambio
 solo en este README permite probar el pipeline sin modificar la aplicación.
+
+El job `iniciachile` debe apuntar a `apptec-cl/iniciachile`, rama `main`, con el
+trigger **GitHub hook trigger for GITScm polling** habilitado.
