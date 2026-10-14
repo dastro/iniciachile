@@ -16,12 +16,12 @@ const jsonLd = {
 }
 
 export const Faq = ({ items = faqs }) => (
-  <section className="py-20 md:py-28">
+  <section className="py-14 md:py-28">
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
-    <div className="container-site grid gap-12 lg:grid-cols-12 lg:gap-16">
+    <div className="container-site grid gap-8 lg:grid-cols-12 lg:gap-16 md:gap-12">
       <div className="lg:col-span-4">
         <SectionHeading
           align="left"
@@ -41,10 +41,16 @@ export const Faq = ({ items = faqs }) => (
       </div>
 
       <div className="lg:col-span-8">
-        <Accordion items={items} />
-        <p className="mt-8 rounded-xl bg-brand50 px-5 py-4 text-[13px] leading-relaxed text-slate-600">
+        {/* En móvil sólo las cuatro primeras preguntas */}
+        <div className="md:hidden">
+          <Accordion items={items.slice(0, 4)} />
+        </div>
+        <div className="hidden md:block">
+          <Accordion items={items} />
+        </div>
+        <p className="mt-8 rounded-2xl bg-sand px-6 py-5 text-[13px] leading-relaxed text-muted">
           Esta información es general y no reemplaza una asesoría para tu caso particular.{' '}
-          <Link href="/contacto" className="font-bold text-brand underline">
+          <Link href="/contacto" className="font-bold text-brand underline underline-offset-2">
             Cuéntanos tu situación
           </Link>{' '}
           para una respuesta ajustada a tus antecedentes.

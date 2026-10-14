@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import Icon from '@/app/components/ui/icons'
 import Accordion from '@/app/components/ui/accordion'
@@ -62,14 +63,14 @@ export default function RegularizacionPage() {
         subtitle="Si tu situación migratoria está vencida, irregular, observada o pendiente de resolución, evaluamos las alternativas disponibles según la normativa vigente."
       >
         <div className="flex flex-col gap-4 sm:flex-row">
-          <a href="#evaluacion" className="btn-primary cta-sheen px-8 py-4">
+          <a href="#evaluacion" className="btn-primary px-8 py-4">
             Evaluar mi situación migratoria
           </a>
-          <a href="#situaciones" className="btn-outline-light px-8 py-4">
+          <a href="#situaciones" className="btn-outline-dark px-8 py-4">
             Ver situaciones que evaluamos
           </a>
         </div>
-        <p className="mt-6 max-w-lg text-[13px] leading-relaxed text-white/45">
+        <p className="mt-6 max-w-lg text-[13px] leading-relaxed text-muted">
           La evaluación identifica opciones y riesgos según tus antecedentes. No garantiza
           aprobación ni resultado migratorio.
         </p>
@@ -78,7 +79,7 @@ export default function RegularizacionPage() {
       {/* Riesgos de no actuar */}
       <section className="border-b border-brand100 bg-brand50/60 py-16 md:py-20">
         <div className="container-site">
-          <h2 className="max-w-2xl text-2xl font-extrabold leading-snug text-brand md:text-3xl">
+          <h2 className="max-w-2xl text-2xl font-bold leading-snug text-brand md:text-3xl">
             Una situación migratoria no resuelta puede agravarse con el tiempo
           </h2>
           <ul className="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -88,7 +89,7 @@ export default function RegularizacionPage() {
                 className="flex items-start gap-3 rounded-2xl border border-brand100 bg-white px-5 py-5"
               >
                 <Icon name="alert" className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                <p className="text-sm leading-relaxed text-slate-600">{risk}</p>
+                <p className="text-sm leading-relaxed text-muted">{risk}</p>
               </li>
             ))}
           </ul>
@@ -107,10 +108,10 @@ export default function RegularizacionPage() {
           <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {situations.map((situation) => (
               <article key={situation.title} className="card-soft">
-                <h3 className="text-lg font-extrabold leading-snug text-brand">
+                <h3 className="text-lg font-bold leading-snug text-brand">
                   {situation.title}
                 </h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
+                <p className="mt-3 text-[15px] leading-relaxed text-muted">
                   {situation.description}
                 </p>
               </article>
@@ -144,8 +145,8 @@ export default function RegularizacionPage() {
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
                   <Icon name={item.icon} className="h-6 w-6" />
                 </span>
-                <h3 className="mt-6 text-lg font-extrabold text-brand">{item.title}</h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
+                <h3 className="mt-6 text-lg font-bold text-brand">{item.title}</h3>
+                <p className="mt-3 text-[15px] leading-relaxed text-muted">
                   {item.description}
                 </p>
               </article>
@@ -172,7 +173,7 @@ export default function RegularizacionPage() {
                 className="flex items-start gap-3 rounded-xl border border-brand100 bg-white px-5 py-4"
               >
                 <Icon name="check" className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                <span className="text-[15px] leading-relaxed text-slate-700">{point}</span>
+                <span className="text-[15px] leading-relaxed text-ink">{point}</span>
               </li>
             ))}
           </ul>
@@ -180,32 +181,38 @@ export default function RegularizacionPage() {
       </section>
 
       {/* Cómo funciona */}
-      <section className="grid-overlay relative overflow-hidden bg-brand py-20 md:py-28">
-        <div className="pointer-events-none absolute -right-24 top-0 h-80 w-80 rounded-full bg-accent/20 blur-[130px]" />
-        <div className="container-site relative">
-          <SectionHeading light eyebrow="Proceso" title="Cómo funciona la evaluación" />
+      <section className="bg-brand50 py-20 md:py-28">
+        <div className="container-site">
+          <SectionHeading eyebrow="Proceso" title="Cómo funciona la evaluación" />
 
-          <ol className="mt-14 grid gap-8 md:grid-cols-4">
-            {processSteps.map((item) => (
-              <li
-                key={item.step}
-                className="rounded-2xl border border-white/10 bg-white/[0.05] p-7"
-              >
-                <span className="text-3xl font-extrabold text-accentLight">{item.step}</span>
-                <h3 className="mt-4 text-lg font-extrabold text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/70">{item.description}</p>
-              </li>
-            ))}
-          </ol>
+          <div className="mt-14 grid gap-8 lg:grid-cols-12 lg:gap-10">
+            <figure className="relative aspect-[16/11] overflow-hidden rounded-3xl shadow-[0_28px_60px_-34px_rgba(15,37,68,0.4)] sm:aspect-[16/9] lg:col-span-5 lg:aspect-auto">
+              <Image
+                src="/images/refresh/consulta-abogada.jpg"
+                alt="Pareja conversando con una abogada que revisa documentos en una oficina luminosa"
+                fill
+                sizes="(min-width: 1024px) 42vw, 100vw"
+                className="object-cover object-[88%_45%]"
+              />
+            </figure>
 
-          <div className="mt-14 border-t border-white/10 pt-10">
-            <p className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-accentLight">
-              Compromiso profesional
-            </p>
+            <ol className="grid gap-6 sm:grid-cols-2 lg:col-span-7">
+              {processSteps.map((item) => (
+                <li key={item.step} className="card-soft">
+                  <span className="text-3xl font-bold text-accent">{item.step}</span>
+                  <h3 className="mt-4 text-lg font-bold text-brand">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">{item.description}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="mt-14 border-t border-brand100 pt-10">
+            <p className="text-sm font-semibold text-accentDark">Compromiso profesional</p>
             <ul className="mt-7 grid gap-x-10 gap-y-4 md:grid-cols-2">
               {commitments.map((commitment) => (
-                <li key={commitment} className="flex items-start gap-3 text-white/75">
-                  <span className="mt-2.5 h-px w-4 shrink-0 bg-accentLight" />
+                <li key={commitment} className="flex items-start gap-3 text-ink">
+                  <span className="mt-2.5 h-px w-4 shrink-0 bg-accent" />
                   <span className="text-[15px] leading-relaxed">{commitment}</span>
                 </li>
               ))}

@@ -18,8 +18,8 @@ export const site = {
   whatsapp: '56954872310', // MOCK
   whatsappMessage:
     'Hola, quiero evaluar mi situación migratoria en Chile con un abogado de Inicia Chile.',
-  email: 'contacto@iniciachile.cl', // MOCK
-  address: 'Av. Providencia 1208, oficina 605, Providencia, Santiago', // MOCK
+  email: 'hola@iniciachile.cl',
+  address: 'Av. Holanda 099, oficina 404, Providencia, Santiago',
   schedule: 'Lunes a viernes, 9:00 a 18:00 h',
 
   social: {
@@ -53,7 +53,7 @@ export const metrics = [
 /** ⚠️ MOCK DATA — oficinas inventadas para la vista previa. */
 export const offices = [
   { city: 'Santiago Centro', detail: 'Huérfanos 1147, oficina 402' },
-  { city: 'Providencia', detail: 'Av. Providencia 1208, oficina 605' },
+  { city: 'Providencia', detail: 'Av. Holanda 099, oficina 404' },
   { city: 'Antofagasta', detail: 'Av. Grecia 750, oficina 21' },
   { city: 'Concepción', detail: 'Barros Arana 631, oficina 308' }
 ]

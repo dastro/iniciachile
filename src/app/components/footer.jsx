@@ -30,12 +30,12 @@ const socialLinks = [
 ]
 
 export const Footer = () => (
-  <footer className="grid-overlay bg-brandDeep text-white">
-    <div className="container-site py-16">
+  <footer className="bg-brand text-white">
+    <div className="container-site py-16 md:py-20">
       <div className="grid gap-12 md:grid-cols-12">
         <div className="md:col-span-4">
           <Logo variant="light" />
-          <p className="mt-6 max-w-xs text-sm leading-relaxed text-white/65">
+          <p className="mt-6 max-w-xs text-sm leading-relaxed text-white/70">
             Estudio jurídico dedicado exclusivamente a derecho migratorio chileno. Evaluamos cada
             caso según sus antecedentes y te decimos con franqueza qué vías existen.
           </p>
@@ -57,7 +57,7 @@ export const Footer = () => (
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 text-white/70 transition-colors hover:border-accent hover:text-accentLight"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 text-white/70 transition-colors hover:border-accentLight hover:text-accentLight"
                 >
                   <svg viewBox="0 0 24 24" fill="currentColor" className="h-[18px] w-[18px]">
                     <path d={social.path} />
@@ -69,7 +69,7 @@ export const Footer = () => (
         </div>
 
         <div className="md:col-span-4">
-          <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-white/45">Servicios</h3>
+          <h3 className="text-sm font-semibold text-white/55">Servicios</h3>
           <ul className="mt-5 grid gap-3 sm:grid-cols-2 md:grid-cols-1">
             {services.map((service) => (
               <li key={service.id}>
@@ -85,7 +85,7 @@ export const Footer = () => (
         </div>
 
         <div className="md:col-span-4">
-          <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-white/45">Contacto</h3>
+          <h3 className="text-sm font-semibold text-white/55">Contacto</h3>
           <ul className="mt-5 space-y-4 text-sm text-white/75">
             <li>
               <a href={site.phoneHref} className="flex items-start gap-3 hover:text-accentLight">
@@ -112,9 +112,7 @@ export const Footer = () => (
             </li>
           </ul>
 
-          <h3 className="mt-9 text-xs font-bold uppercase tracking-[0.18em] text-white/45">
-            Sitio
-          </h3>
+          <h3 className="mt-9 text-sm font-semibold text-white/55">Sitio</h3>
           <ul className="mt-4 space-y-3 text-sm text-white/75">
             <li>
               <Link href="/nosotros" className="hover:text-accentLight">
@@ -135,13 +133,13 @@ export const Footer = () => (
         </div>
       </div>
 
-      <div className="mt-14 border-t border-white/10 pt-7">
-        <p className="text-xs leading-relaxed text-white/45">
+      <div className="mt-14 border-t border-white/12 pt-7">
+        <p className="text-xs leading-relaxed text-white/55">
           La información de este sitio es de carácter general y no constituye asesoría legal para un
           caso particular. Ningún servicio garantiza la aprobación de una solicitud: la decisión
           final corresponde siempre a la autoridad migratoria.
         </p>
-        <p className="mt-4 text-xs text-white/45">
+        <p className="mt-4 text-xs text-white/55">
           © {year} {site.legalName}. Todos los derechos reservados.
         </p>
       </div>

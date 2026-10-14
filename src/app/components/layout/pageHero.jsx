@@ -1,16 +1,31 @@
-/** Cabecera compacta para páginas interiores. */
-export const PageHero = ({ eyebrow, title, subtitle, children }) => (
-  <section className="grid-overlay relative overflow-hidden bg-brandDeep pb-16 pt-36 md:pb-24 md:pt-44">
-    <div className="absolute inset-0 -z-0 bg-[radial-gradient(110%_80%_at_15%_0%,#16365E_0%,#0F2544_50%,#061120_100%)]" />
-    <div className="pointer-events-none absolute -right-24 top-6 h-80 w-80 rounded-full bg-accent/20 blur-[130px]" />
-
+/**
+ * Cabecera compacta para páginas interiores.
+ * `compact` reduce aún más la altura en móvil (p. ej. para que el formulario
+ * de contacto quede a la vista); en escritorio no cambia nada.
+ */
+export const PageHero = ({ eyebrow, title, subtitle, children, compact = false }) => (
+  <section
+    className={`relative overflow-hidden border-b border-brand100/70 bg-sand md:pb-24 md:pt-44 ${
+      compact ? 'pb-8 pt-28' : 'pb-16 pt-36'
+    }`}
+  >
     <div className="container-site relative">
-      {eyebrow && <div className="eyebrow-light">{eyebrow}</div>}
-      <h1 className="mt-6 max-w-3xl text-[34px] font-extrabold leading-[1.1] tracking-[-0.03em] text-white md:text-[50px]">
+      {eyebrow && <div className="eyebrow">{eyebrow}</div>}
+      <h1
+        className={`max-w-3xl font-extrabold leading-[1.1] tracking-[-0.03em] text-brand md:mt-5 md:text-[50px] ${
+          compact ? 'mt-3 text-[28px]' : 'mt-5 text-[34px]'
+        }`}
+      >
         {title}
       </h1>
       {subtitle && (
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">{subtitle}</p>
+        <p
+          className={`max-w-2xl leading-relaxed text-muted md:mt-6 md:text-lg ${
+            compact ? 'mt-3 text-[15px]' : 'mt-6 text-lg'
+          }`}
+        >
+          {subtitle}
+        </p>
       )}
       {children && <div className="mt-9">{children}</div>}
     </div>

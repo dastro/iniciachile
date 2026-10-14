@@ -112,7 +112,7 @@ export const trustItems = [
     description: 'Revisamos tu caso y te decimos con franqueza si tiene vía legal.'
   },
   {
-    icon: 'scale',
+    icon: 'compass',
     title: 'Abogados especialistas',
     description: 'Dedicación exclusiva a derecho migratorio chileno.'
   },

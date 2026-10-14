@@ -8,3 +8,7 @@ npm-debug.log*
 .env*.local
 .vercel
 next-env.d.ts
+
+# Material de entrega del cliente (no es parte del sitio)
+00_Código fuente/
+01_Materiales/

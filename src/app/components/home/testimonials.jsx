@@ -20,18 +20,18 @@ const Stars = ({ rating = 5 }) => (
 )
 
 const Card = ({ item }) => (
-  <figure className="flex h-full flex-col rounded-2xl border border-brand100 bg-white p-7">
+  <figure className="flex h-full flex-col rounded-2xl border border-brand100/60 bg-white p-8 shadow-[0_1px_2px_rgba(15,37,68,0.04),0_14px_34px_-26px_rgba(15,37,68,0.2)]">
     <Stars rating={item.rating} />
-    <blockquote className="mt-5 flex-grow text-[15px] leading-relaxed text-slate-700">
+    <blockquote className="mt-5 flex-grow text-base leading-relaxed text-ink">
       “{item.quote}”
     </blockquote>
-    <figcaption className="mt-7 flex items-center gap-3 border-t border-brand100 pt-5">
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand text-sm font-extrabold text-white">
+    <figcaption className="mt-7 flex items-center gap-3.5 border-t border-brand100/70 pt-5">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent50 text-sm font-bold text-accentDark ring-1 ring-accentLight">
         {item.name.charAt(0)}
       </span>
       <span>
-        <span className="block text-sm font-extrabold text-brand">{item.name}</span>
-        <span className="block text-xs text-slate-500">
+        <span className="block text-sm font-bold text-brand">{item.name}</span>
+        <span className="block text-[13px] text-muted">
           {item.origin} · {item.service}
         </span>
       </span>
@@ -52,7 +52,7 @@ export const Testimonials = () => {
   const visible = testimonials.slice(page * perPage, page * perPage + perPage)
 
   return (
-    <section className="bg-brand50/60 py-20 md:py-28">
+    <section className="bg-sand py-14 md:py-28">
       <div className="container-site">
         <SectionHeading
           eyebrow="Testimonios"
@@ -67,9 +67,9 @@ export const Testimonials = () => {
           ))}
         </div>
 
-        {/* Móvil: la lista completa, apilada */}
-        <div className="mt-12 grid gap-5 md:hidden">
-          {testimonials.map((item) => (
+        {/* Móvil: sólo dos, para no alargar la página */}
+        <div className="mt-10 grid gap-5 md:hidden">
+          {testimonials.slice(0, 2).map((item) => (
             <Card key={item.name} item={item} />
           ))}
         </div>

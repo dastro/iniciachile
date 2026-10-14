@@ -1,13 +1,22 @@
-import { Plus_Jakarta_Sans } from 'next/font/google'
+import { Manrope, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/app/components/navbar'
 import Footer from '@/app/components/footer'
 import WhatsappButton from '@/app/components/ui/whatsappButton'
 import { site } from '@/app/data/site'
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: '--font-jakarta',
+// Tipografía global de la interfaz.
+const manrope = Manrope({
+  variable: '--font-manrope',
   subsets: ['latin'],
+  display: 'swap'
+})
+
+// Sólo para el logotipo: conserva la tipografía original de la marca.
+const logoFont = Plus_Jakarta_Sans({
+  variable: '--font-logo',
+  subsets: ['latin'],
+  weight: ['700', '800'],
   display: 'swap'
 })
 
@@ -53,8 +62,8 @@ const jsonLd = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es-CL" className={jakarta.variable}>
-      <body className="bg-white antialiased">
+    <html lang="es-CL" className={`${manrope.variable} ${logoFont.variable}`}>
+      <body className="bg-cream antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

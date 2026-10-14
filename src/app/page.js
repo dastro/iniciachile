@@ -23,7 +23,10 @@ export default function Home() {
       <TrustBar />
       <Services />
       <Risks />
-      <Situations />
+      {/* En móvil se omite: repite lo que ya cuentan Servicios y Riesgos */}
+      <div className="hidden md:block">
+        <Situations />
+      </div>
       <Process />
       <WhyUs />
       <Testimonials />

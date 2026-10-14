@@ -1,8 +1,9 @@
 import Link from 'next/link'
 
 /**
- * Logotipo Inicia Chile: isotipo en SVG + tipografía en HTML,
- * para que la marca use siempre Plus Jakarta Sans cargada por next/font.
+ * Logotipo Inicia Chile: isotipo en SVG + tipografía en HTML.
+ * El logo no sigue el sistema de interfaz: conserva su tipografía (Plus Jakarta Sans,
+ * variable --font-logo) y su naranja propio, tal como en los archivos de marca.
  *
  * `variant`: 'dark' sobre fondos claros, 'light' sobre fondos azules.
  */
@@ -42,16 +43,16 @@ export const Logo = ({ variant = 'dark', href = '/', showTagline = true, classNa
       <Isotype variant={variant} className="h-11 w-11 shrink-0" />
       <span className="flex flex-col leading-none">
         <span
-          className={`text-[21px] font-extrabold tracking-[-0.02em] ${
+          className={`font-logo text-[21px] font-extrabold tracking-[-0.02em] ${
             variant === 'light' ? 'text-white' : 'text-brand'
           }`}
         >
-          INICIA <span className="text-accent">CHILE</span>
+          INICIA <span className="text-[#D97706]">CHILE</span>
         </span>
         {showTagline && (
           <span
-            className={`mt-1 text-[8.5px] font-bold uppercase tracking-[0.22em] ${
-              variant === 'light' ? 'text-white/60' : 'text-slate-500'
+            className={`mt-1 font-logo text-[8.5px] font-bold uppercase tracking-[0.22em] ${
+              variant === 'light' ? 'text-white/60' : 'text-[#64748B]'
             }`}
           >
             Estudio Jurídico Migratorio

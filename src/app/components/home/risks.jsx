@@ -3,15 +3,12 @@ import Icon from '@/app/components/ui/icons'
 import SectionHeading from '@/app/components/ui/sectionHeading'
 import { risks } from '@/app/data/content'
 
-/** Bloque de urgencia: por qué una situación sin resolver se agrava. */
+/** Por qué una situación sin resolver se agrava: tono sereno, sin alarmas visuales. */
 export const Risks = () => (
-  <section className="grid-overlay relative overflow-hidden bg-brand py-20 md:py-28">
-    <div className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full bg-accent/20 blur-[130px]" />
-
-    <div className="container-site relative grid gap-14 lg:grid-cols-12">
+  <section className="bg-sand py-14 md:py-28">
+    <div className="container-site grid gap-12 lg:grid-cols-12 lg:gap-16">
       <div className="lg:col-span-5">
         <SectionHeading
-          light
           align="left"
           eyebrow="Por qué no conviene esperar"
           title="Una situación migratoria no resuelta puede agravarse con el tiempo"
@@ -23,14 +20,17 @@ export const Risks = () => (
         </Link>
       </div>
 
-      <ul className="grid gap-4 self-center lg:col-span-7">
+      <ul className="self-center overflow-hidden rounded-3xl border border-brand100/70 bg-white shadow-[0_1px_2px_rgba(15,37,68,0.04),0_18px_40px_-28px_rgba(15,37,68,0.22)] lg:col-span-7">
         {risks.map((risk) => (
           <li
             key={risk}
-            className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.05] px-6 py-5"
+            className="flex items-start gap-4 border-b border-brand100/70 px-6 py-5 last:border-b-0 md:px-8"
           >
-            <Icon name="alert" className="mt-0.5 h-5 w-5 shrink-0 text-accentLight" />
-            <p className="text-[15px] leading-relaxed text-white/80">{risk}</p>
+            <span
+              aria-hidden="true"
+              className="mt-[9px] h-2 w-2 shrink-0 rounded-full bg-accent/70"
+            />
+            <p className="text-[15px] leading-relaxed text-ink md:text-base">{risk}</p>
           </li>
         ))}
       </ul>

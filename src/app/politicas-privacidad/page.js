@@ -63,7 +63,7 @@ export default function PrivacidadPage() {
 
       <section className="py-16 md:py-24">
         <div className="container-site max-w-3xl">
-          <div className="rounded-xl border border-accent/30 bg-accent/5 px-5 py-4 text-sm leading-relaxed text-slate-700">
+          <div className="rounded-xl border border-accent/30 bg-accent/5 px-5 py-4 text-sm leading-relaxed text-ink">
             Documento en revisión. El estudio debe validar este texto antes de su publicación
             definitiva.
           </div>
@@ -71,8 +71,8 @@ export default function PrivacidadPage() {
           <div className="mt-10 space-y-9">
             {sections.map((section) => (
               <article key={section.title}>
-                <h2 className="text-xl font-extrabold text-brand">{section.title}</h2>
-                <p className="mt-3 text-[15px] leading-relaxed text-slate-600">{section.body}</p>
+                <h2 className="text-xl font-bold text-brand">{section.title}</h2>
+                <p className="mt-3 text-[15px] leading-relaxed text-muted">{section.body}</p>
               </article>
             ))}
           </div>

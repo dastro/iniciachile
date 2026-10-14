@@ -29,7 +29,7 @@ export const Navbar = () => {
   const [mobileServices, setMobileServices] = useState(false)
   const dropdownRef = useRef(null)
 
-  // Sólo la home tiene hero oscuro a sangre, así que sólo ahí la navbar arranca transparente.
+  // Sólo la home (y la landing de regularización) tienen hero a sangre, así que sólo ahí la navbar arranca transparente.
   const overHero =
     pathname === '/' || pathname === '/regularizacion' || pathname === '/opciones-header'
   const transparent = overHero && !scrolled && !menuOpen
@@ -58,8 +58,8 @@ export const Navbar = () => {
   const isActive = (href) => (href === '/' ? pathname === '/' : pathname.startsWith(href))
 
   const linkClass = (href) =>
-    `border-b-[3px] pb-1 transition-colors ${
-      isActive(href) ? 'border-accent' : 'border-transparent hover:border-accent/60'
+    `border-b-2 pb-1 transition-colors ${
+      isActive(href) ? 'border-accent' : 'border-transparent hover:border-accent/50'
     }`
 
   return (
@@ -67,17 +67,13 @@ export const Navbar = () => {
       className={`fixed top-0 z-[80] w-full transition-all duration-300 ${
         transparent
           ? 'bg-transparent py-2'
-          : 'border-b border-brand100/70 bg-white/95 py-1 shadow-[0_6px_24px_-18px_rgba(15,37,68,0.6)] backdrop-blur'
+          : 'border-b border-brand100/70 bg-cream/95 py-1 shadow-[0_8px_24px_-20px_rgba(15,37,68,0.35)] backdrop-blur'
       }`}
     >
       <div className="container-site flex items-center justify-between py-3">
-        <Logo variant={transparent ? 'light' : 'dark'} />
+        <Logo variant="dark" />
 
-        <div
-          className={`hidden items-center gap-7 text-sm font-bold lg:flex ${
-            transparent ? 'text-white' : 'text-brand'
-          }`}
-        >
+        <div className="hidden items-center gap-8 text-[15px] font-semibold text-brand lg:flex">
           <Link href="/" className={linkClass('/')}>
             Inicio
           </Link>
@@ -94,17 +90,17 @@ export const Navbar = () => {
             </button>
 
             {dropdown && (
-              <div className="absolute left-0 top-full z-50 mt-4 w-[22rem] animate-fadeIn overflow-hidden rounded-2xl bg-white p-2 shadow-2xl ring-1 ring-brand/10">
+              <div className="absolute left-0 top-full z-50 mt-4 w-[22rem] animate-fadeIn overflow-hidden rounded-2xl bg-white p-2 shadow-[0_28px_60px_-28px_rgba(15,37,68,0.4)] ring-1 ring-brand100">
                 {services.map((service) => (
                   <Link
                     key={service.id}
                     href={service.href || `/servicios#${service.id}`}
                     className="group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-brand50"
                   >
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand text-white transition-colors group-hover:bg-accent">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand50 text-brand transition-colors group-hover:bg-accent group-hover:text-white">
                       <Icon name={service.icon} className="h-[18px] w-[18px]" />
                     </span>
-                    <span className="text-[13px] font-bold leading-snug text-brand">
+                    <span className="text-[14px] font-semibold leading-snug text-brand">
                       {service.title}
                     </span>
                   </Link>
@@ -122,17 +118,13 @@ export const Navbar = () => {
 
           <a
             href={site.phoneHref}
-            className={`flex items-center gap-2 rounded-lg border-2 px-3.5 py-2 text-[13px] font-extrabold tracking-wide transition-colors ${
-              transparent
-                ? 'border-white/70 text-white hover:bg-white/10'
-                : 'border-brand100 text-brand hover:bg-brand50'
-            }`}
+            className="flex items-center gap-2 text-[14px] font-semibold text-brand transition-colors hover:text-accentDark"
           >
-            <Icon name="phone" className="h-4 w-4" />
+            <Icon name="phone" className="h-4 w-4 text-accent" />
             {site.phone}
           </a>
 
-          <Link href="/contacto" className="btn-primary px-5 py-2.5 text-[13px]">
+          <Link href="/contacto" className="btn-primary px-5 py-2.5 text-[14px]">
             Evaluar mi caso
           </Link>
         </div>
@@ -142,7 +134,7 @@ export const Navbar = () => {
           onClick={() => setMenuOpen((prev) => !prev)}
           aria-label="Abrir menú"
           aria-expanded={menuOpen}
-          className={`lg:hidden ${transparent ? 'text-white' : 'text-brand'}`}
+          className="text-brand lg:hidden"
         >
           <svg
             className="h-7 w-7"
@@ -159,7 +151,7 @@ export const Navbar = () => {
 
       {/* Menú móvil */}
       <div
-        className={`absolute left-0 top-full w-full origin-top border-t border-brand100 bg-white shadow-xl transition-all duration-300 lg:hidden ${
+        className={`absolute left-0 top-full w-full origin-top border-t border-brand100 bg-cream shadow-xl transition-all duration-300 lg:hidden ${
           menuOpen
             ? 'max-h-[85vh] overflow-y-auto opacity-100'
             : 'max-h-0 overflow-hidden opacity-0'
@@ -167,7 +159,7 @@ export const Navbar = () => {
       >
         <ul className="container-site py-2 text-brand">
           <li className="border-b border-brand100">
-            <Link href="/" className="block py-4 font-bold">
+            <Link href="/" className="block py-4 font-semibold">
               Inicio
             </Link>
           </li>
@@ -175,7 +167,7 @@ export const Navbar = () => {
             <button
               type="button"
               onClick={() => setMobileServices((prev) => !prev)}
-              className="flex w-full items-center justify-between py-4 text-left font-bold"
+              className="flex w-full items-center justify-between py-4 text-left font-semibold"
             >
               Servicios
               <Chevron open={mobileServices} />
@@ -186,7 +178,7 @@ export const Navbar = () => {
                   <li key={service.id}>
                     <Link
                       href={service.href || `/servicios#${service.id}`}
-                      className="flex items-center gap-2.5 py-2.5 text-sm text-slate-600"
+                      className="flex items-center gap-2.5 py-2.5 text-sm text-muted"
                     >
                       <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                       {service.title}
@@ -197,12 +189,12 @@ export const Navbar = () => {
             )}
           </li>
           <li className="border-b border-brand100">
-            <Link href="/regularizacion" className="block py-4 font-bold">
+            <Link href="/regularizacion" className="block py-4 font-semibold">
               Regularización
             </Link>
           </li>
           <li className="border-b border-brand100">
-            <Link href="/nosotros" className="block py-4 font-bold">
+            <Link href="/nosotros" className="block py-4 font-semibold">
               Nosotros
             </Link>
           </li>

@@ -1,20 +1,29 @@
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
+  --background: #fcfbf8;
+  --foreground: #172a3a;
 
-  /* Azul institucional — tomado del isotipo (#0F2544) */
+  /* Navy institucional — ancla de la marca (#0F2544) */
   --brand-rgb: 15 37 68; /* #0F2544 */
   --brand-dark-rgb: 10 26 49; /* #0A1A31 */
   --brand-deep-rgb: 6 17 32; /* #061120 */
-  --brand-50-rgb: 238 242 247; /* #EEF2F7 */
-  --brand-100-rgb: 213 222 234; /* #D5DEEA */
-  --brand-200-rgb: 166 184 207; /* #A6B8CF */
+  --brand-50-rgb: 238 243 246; /* #EEF3F6 fondo frío */
+  --brand-100-rgb: 220 229 235; /* #DCE5EB bordes suaves */
+  --brand-200-rgb: 169 188 203; /* #A9BCCB */
 
-  /* Naranjo de marca — estrella y punto de origen */
-  --accent-rgb: 217 119 6; /* #D97706 */
-  --accent-dark-rgb: 180 95 3; /* #B45F03 */
-  --accent-light-rgb: 245 158 11; /* #F59E0B */
-  --accent-50-rgb: 255 245 232; /* #FFF5E8 */
+  /* Terracota — acento de interfaz */
+  --accent-rgb: 182 92 70; /* #B65C46 principal */
+  --accent-dark-rgb: 157 73 53; /* #9D4935 hover */
+  --accent-light-rgb: 235 194 183; /* #EBC2B7 claro */
+  --accent-50-rgb: 251 242 239; /* #FBF2EF fondo de acento */
+
+  /* Apoyos */
+  --steel-rgb: 53 94 124; /* #355E7C azul secundario */
+  --sand-rgb: 246 241 233; /* #F6F1E9 arena */
+  --cream-rgb: 252 251 248; /* #FCFBF8 blanco cálido */
+
+  /* Texto */
+  --ink-rgb: 23 42 58; /* #172A3A principal */
+  --muted-rgb: 94 109 120; /* #5E6D78 secundario */
 }
 
 @tailwind base;
@@ -32,7 +41,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family:
-    var(--font-jakarta),
+    var(--font-manrope),
     system-ui,
     -apple-system,
     sans-serif;
@@ -51,6 +60,13 @@ a {
   text-decoration: none;
 }
 
+/* Estados de foco visibles y consistentes */
+:focus-visible {
+  outline: 2px solid rgb(var(--steel-rgb));
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
 /* Compensa la navbar fija al saltar a un ancla */
 section[id],
 article[id] {
@@ -62,35 +78,53 @@ article[id] {
     @apply mx-auto w-full max-w-[1200px] px-5 xl:px-0;
   }
 
-  /* Píldora superior de sección: "Podemos ayudarte", "Servicios", etc. */
+  /* Etiqueta superior de sección: "Podemos ayudarte", "Servicios", etc. */
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-xl border border-brand100 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-brand;
+    @apply inline-flex items-center gap-2.5 text-sm font-semibold tracking-[0.01em] text-accentDark;
+  }
+
+  .eyebrow::before {
+    content: '';
+    @apply h-px w-6 bg-accent;
   }
 
   .eyebrow-light {
-    @apply inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white;
+    @apply inline-flex items-center gap-2.5 text-sm font-semibold tracking-[0.01em] text-accentLight;
+  }
+
+  .eyebrow-light::before {
+    content: '';
+    @apply h-px w-6 bg-accentLight;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-accent px-7 py-3.5 text-center text-sm font-extrabold tracking-wide text-white transition-colors hover:bg-accentDark;
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[10px] bg-accent px-7 py-3.5 text-center text-[15px] font-bold text-white transition-colors duration-200 hover:bg-accentDark;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-brand px-7 py-3.5 text-center text-sm font-extrabold tracking-wide text-white transition-colors hover:bg-brandDark;
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[10px] bg-brand px-7 py-3.5 text-center text-[15px] font-bold text-white transition-colors duration-200 hover:bg-brandDark;
   }
 
   .btn-outline-light {
-    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white px-7 py-3 text-center text-sm font-extrabold tracking-wide text-white transition-colors hover:bg-white/10;
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[10px] border-[1.5px] border-white/80 px-7 py-[13px] text-center text-[15px] font-bold text-white transition-colors duration-200 hover:bg-white/10;
   }
 
   .btn-outline-dark {
-    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-brand px-7 py-3 text-center text-sm font-extrabold tracking-wide text-brand transition-colors hover:bg-brand50;
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[10px] border-[1.5px] border-brand px-7 py-[13px] text-center text-[15px] font-bold text-brand transition-colors duration-200 hover:bg-brand hover:text-white;
   }
 
   .card-soft {
-    @apply rounded-2xl border border-brand100/70 bg-white p-6 shadow-[0_10px_30px_-18px_rgba(15,37,68,0.35)];
+    @apply rounded-2xl border border-brand100/80 bg-white p-8 shadow-[0_1px_2px_rgba(15,37,68,0.04),0_12px_32px_-20px_rgba(15,37,68,0.18)];
   }
 }
+
+/* Tira de banderas: dos copias idénticas del SVG que se desplazan sin salto */
+.flags-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+}
+
+/* --- Legado: sólo lo usa la página de exploración /opciones-header --- */
 
 /* Malla sutil sobre fondos azules profundos */
 .grid-overlay {
@@ -100,44 +134,12 @@ article[id] {
   background-size: 56px 56px;
 }
 
-/* Brillo que recorre el CTA principal (tomado del patrón del sitio de referencia) */
 .cta-sheen {
   position: relative;
   overflow: hidden;
   isolation: isolate;
 }
 
-.cta-sheen::before {
-  content: '';
-  position: absolute;
-  top: -30%;
-  bottom: -30%;
-  left: -45%;
-  width: 40%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
-  transform: skewX(-20deg) translateX(-180%);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 1;
-  animation: ctaSheen 3.6s ease-in-out infinite;
-}
-
-@keyframes ctaSheen {
-  0%,
-  70% {
-    opacity: 0;
-    transform: skewX(-20deg) translateX(-180%);
-  }
-  74% {
-    opacity: 0.9;
-  }
-  100% {
-    opacity: 0;
-    transform: skewX(-20deg) translateX(430%);
-  }
-}
-
-/* Movimiento del fondo de marca del hero: se ve mientras no hay video cargado */
 .hero-grid-drift {
   animation: gridDrift 26s linear infinite;
 }
@@ -175,7 +177,6 @@ article[id] {
   }
 }
 
-/* Trazo del isotipo dibujándose, para la opción con marca de agua animada */
 .isotype-draw {
   stroke-dasharray: 60;
   animation: isotypeDraw 9s ease-in-out infinite;
@@ -195,9 +196,11 @@ article[id] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cta-sheen::before,
   .animate-floatSlow,
+  .animate-fadeIn,
   .animate-fadeInUp,
+  .animate-fadeSoft,
+  .animate-marquee,
   .hero-grid-drift,
   .hero-halo,
   .isotype-draw {
@@ -205,5 +208,10 @@ article[id] {
   }
   html {
     scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
   }
 }

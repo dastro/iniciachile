@@ -13,8 +13,13 @@ export const metadata = {
 }
 
 const channels = [
-  { icon: 'whatsapp', label: 'WhatsApp', value: site.phone, href: whatsappUrl, external: true },
-  { icon: 'phone', label: 'Teléfono', value: site.phone, href: site.phoneHref },
+  {
+    icon: 'whatsapp',
+    label: 'Teléfono / WhatsApp',
+    value: site.phone,
+    href: whatsappUrl,
+    external: true
+  },
   { icon: 'mail', label: 'Correo', value: site.email, href: `mailto:${site.email}` },
   { icon: 'pin', label: 'Oficina', value: site.address },
   { icon: 'clock', label: 'Horario', value: site.schedule }
@@ -24,12 +29,13 @@ export default function ContactoPage() {
   return (
     <>
       <PageHero
+        compact
         eyebrow="Contacto"
-        title="Cuéntanos tu caso y te decimos qué vías tienes"
-        subtitle="Completa el formulario con tus datos y una breve descripción de tu situación. El equipo revisa los antecedentes y te responde dentro de 48 horas hábiles."
+        title="Cuéntanos tu caso"
+        subtitle="Completa el formulario y el equipo te responde dentro de 48 horas hábiles."
       />
 
-      <section className="py-16 md:py-24">
+      <section className="py-6 md:py-24">
         <div className="container-site grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
             <SectionHeading align="left" eyebrow="Canales directos" title="Hablemos" />
@@ -42,7 +48,7 @@ export default function ContactoPage() {
                       <Icon name={channel.icon} className="h-5 w-5" />
                     </span>
                     <span>
-                      <span className="block text-[11px] font-extrabold uppercase tracking-[0.14em] text-slate-400">
+                      <span className="block text-[13px] font-semibold text-muted">
                         {channel.label}
                       </span>
                       <span className="mt-0.5 block text-[15px] font-bold text-brand">
@@ -74,11 +80,11 @@ export default function ContactoPage() {
             </ul>
 
             <div className="mt-8 rounded-2xl bg-brand p-7 text-white">
-              <h3 className="text-lg font-extrabold">Qué pasa después de escribirnos</h3>
+              <h3 className="text-lg font-bold">Qué pasa después de escribirnos</h3>
               <ol className="mt-5 space-y-4">
                 {processSteps.map((step) => (
                   <li key={step.step} className="flex gap-3">
-                    <span className="text-sm font-extrabold text-accentLight">{step.step}</span>
+                    <span className="text-sm font-bold text-accentLight">{step.step}</span>
                     <span className="text-sm leading-relaxed text-white/75">
                       <strong className="font-bold text-white">{step.title}.</strong>{' '}
                       {step.description}
@@ -89,7 +95,8 @@ export default function ContactoPage() {
             </div>
           </div>
 
-          <div className="lg:col-span-8">
+          {/* En móvil el formulario va primero; en escritorio queda a la derecha */}
+          <div className="order-first lg:order-none lg:col-span-8">
             <ContactForm source="contacto" />
           </div>
         </div>

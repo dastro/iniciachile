@@ -17,14 +17,16 @@ export const Accordion = ({ items, defaultOpen = 0 }) => {
                 type="button"
                 onClick={() => setOpen(isOpen ? -1 : index)}
                 aria-expanded={isOpen}
-                className="flex w-full items-start justify-between gap-6 py-5 text-left"
+                className="group flex w-full items-start justify-between gap-6 py-6 text-left"
               >
-                <span className="text-base font-bold text-brand md:text-lg">{item.question}</span>
+                <span className="text-base font-bold text-brand transition-colors group-hover:text-accentDark md:text-lg">
+                  {item.question}
+                </span>
                 <span
-                  className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-200 ${
+                  className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
                     isOpen
-                      ? 'rotate-180 border-accent bg-accent text-white'
-                      : 'border-brand100 text-brand'
+                      ? 'rotate-180 bg-accent text-white'
+                      : 'bg-brand50 text-brand group-hover:bg-accent50 group-hover:text-accentDark'
                   }`}
                 >
                   <svg
@@ -47,7 +49,7 @@ export const Accordion = ({ items, defaultOpen = 0 }) => {
               }`}
             >
               <div className="overflow-hidden">
-                <p className="pb-6 pr-10 text-base leading-relaxed text-slate-600">{item.answer}</p>
+                <p className="pb-7 pr-12 text-base leading-relaxed text-muted">{item.answer}</p>
               </div>
             </div>
           </div>

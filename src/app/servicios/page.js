@@ -29,7 +29,7 @@ export default function ServiciosPage() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline-light px-8 py-4"
+            className="btn-outline-dark px-8 py-4"
           >
             <Icon name="whatsapp" className="h-5 w-5" />
             Consultar por WhatsApp
@@ -64,26 +64,26 @@ export default function ServiciosPage() {
                 <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-brand text-white">
                   <Icon name={service.icon} className="h-7 w-7" />
                 </span>
-                <p className="mt-5 text-[13px] font-extrabold tracking-[0.2em] text-accent">
+                <p className="mt-5 text-[13px] font-bold tracking-[0.2em] text-accent">
                   {String(index + 1).padStart(2, '0')}
                 </p>
-                <h2 className="mt-2 text-2xl font-extrabold leading-snug text-brand">
+                <h2 className="mt-2 text-2xl font-bold leading-snug text-brand">
                   {service.title}
                 </h2>
-                <p className="mt-4 text-[15px] leading-relaxed text-slate-600">{service.short}</p>
+                <p className="mt-4 text-[15px] leading-relaxed text-muted">{service.short}</p>
               </div>
 
               <div className="md:col-span-8 md:border-l md:border-brand100 md:pl-10">
-                <p className="text-base leading-relaxed text-slate-700">{service.description}</p>
+                <p className="text-base leading-relaxed text-ink">{service.description}</p>
 
-                <h3 className="mt-7 text-[11px] font-extrabold uppercase tracking-[0.16em] text-brand">
+                <h3 className="mt-7 text-sm font-semibold text-accentDark">
                   Qué incluye
                 </h3>
                 <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                   {service.bullets.map((bullet) => (
                     <li key={bullet} className="flex items-start gap-3">
                       <Icon name="check" className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                      <span className="text-sm leading-relaxed text-slate-600">{bullet}</span>
+                      <span className="text-sm leading-relaxed text-muted">{bullet}</span>
                     </li>
                   ))}
                 </ul>

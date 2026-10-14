@@ -2,9 +2,62 @@
  * Catálogo de servicios de Inicia Chile.
  *
  * `icon` referencia una clave del mapa en components/ui/icons.jsx.
- * `featured` marca los que aparecen en la grilla de la home.
+ * `featured` marca los que aparecen en la grilla de la home (los tres primeros
+ * son los únicos visibles en móvil). `popular` destaca los de mayor demanda.
  */
 export const services = [
+  {
+    id: 'regularizacion',
+    icon: 'compass',
+    title: 'Regularización migratoria',
+    short:
+      'Si tu permiso está vencido, irregular u observado, evaluamos las alternativas disponibles según la normativa vigente.',
+    featured: true,
+    popular: true,
+    href: '/regularizacion',
+    description:
+      'Regularizar no es solo completar un formulario en Extranjería: requiere evaluar antecedentes, identificar la vía correcta y anticipar riesgos. Analizamos el tipo de irregularidad, su gravedad y las implicancias legales antes de recomendar cualquier acción.',
+    bullets: [
+      'Diagnóstico del tipo de irregularidad y su gravedad',
+      'Identificación de vías legales según la normativa vigente',
+      'Análisis de plazos, observaciones y notificaciones previas',
+      'Evaluación de riesgos antes de iniciar cualquier trámite'
+    ]
+  },
+  {
+    id: 'permanencia-definitiva',
+    icon: 'shield',
+    title: 'Permanencia definitiva',
+    short:
+      'Revisamos tus antecedentes y te acompañamos en la solicitud para avanzar hacia una permanencia estable en Chile.',
+    featured: true,
+    popular: true,
+    description:
+      'La permanencia definitiva te permite residir en Chile de forma indefinida y sin sujeción a un empleador o actividad determinada. Antes de presentarla verificamos el cumplimiento de plazos de permanencia, ausencias del país y antecedentes, porque un requisito no acreditado es la causa más frecuente de rechazo.',
+    bullets: [
+      'Cómputo de días de permanencia efectiva y revisión de ausencias',
+      'Revisión de antecedentes penales, tributarios y previsionales',
+      'Preparación y presentación de la solicitud',
+      'Gestión de observaciones y subsanaciones posteriores'
+    ]
+  },
+  {
+    id: 'subsanaciones',
+    icon: 'document',
+    title: 'Subsanaciones y observaciones',
+    short:
+      'Respondemos observaciones de la autoridad migratoria y preparamos los documentos que falten o deban corregirse.',
+    featured: true,
+    popular: true,
+    description:
+      'Cuando el Servicio Nacional de Migraciones observa una solicitud, el plazo para responder es acotado y una respuesta incompleta puede terminar en archivo o rechazo. Revisamos qué se está objetando exactamente y preparamos una respuesta fundada dentro de plazo.',
+    bullets: [
+      'Lectura y análisis de la observación notificada',
+      'Preparación de documentos faltantes o corregidos',
+      'Respuesta fundada dentro del plazo legal',
+      'Reactivación de trámites archivados cuando procede'
+    ]
+  },
   {
     id: 'residencia-temporal',
     icon: 'card',
@@ -22,22 +75,6 @@ export const services = [
     ]
   },
   {
-    id: 'permanencia-definitiva',
-    icon: 'shield',
-    title: 'Permanencia definitiva',
-    short:
-      'Revisamos tus antecedentes y te acompañamos en la solicitud para avanzar hacia una permanencia estable en Chile.',
-    featured: true,
-    description:
-      'La permanencia definitiva te permite residir en Chile de forma indefinida y sin sujeción a un empleador o actividad determinada. Antes de presentarla verificamos el cumplimiento de plazos de permanencia, ausencias del país y antecedentes, porque un requisito no acreditado es la causa más frecuente de rechazo.',
-    bullets: [
-      'Cómputo de días de permanencia efectiva y revisión de ausencias',
-      'Revisión de antecedentes penales, tributarios y previsionales',
-      'Preparación y presentación de la solicitud',
-      'Gestión de observaciones y subsanaciones posteriores'
-    ]
-  },
-  {
     id: 'nacionalizacion',
     icon: 'star',
     title: 'Nacionalización chilena',
@@ -51,39 +88,6 @@ export const services = [
       'Preparación del expediente y documentos de respaldo',
       'Orientación sobre el examen de nacionalización',
       'Seguimiento hasta la resolución'
-    ]
-  },
-  {
-    id: 'regularizacion',
-    icon: 'compass',
-    title: 'Regularización migratoria',
-    short:
-      'Si tu permiso está vencido, irregular u observado, evaluamos las alternativas disponibles según la normativa vigente.',
-    featured: true,
-    href: '/regularizacion',
-    description:
-      'Regularizar no es solo completar un formulario en Extranjería: requiere evaluar antecedentes, identificar la vía correcta y anticipar riesgos. Analizamos el tipo de irregularidad, su gravedad y las implicancias legales antes de recomendar cualquier acción.',
-    bullets: [
-      'Diagnóstico del tipo de irregularidad y su gravedad',
-      'Identificación de vías legales según la normativa vigente',
-      'Análisis de plazos, observaciones y notificaciones previas',
-      'Evaluación de riesgos antes de iniciar cualquier trámite'
-    ]
-  },
-  {
-    id: 'subsanaciones',
-    icon: 'document',
-    title: 'Subsanaciones y observaciones',
-    short:
-      'Respondemos observaciones de la autoridad migratoria y preparamos los documentos que falten o deban corregirse.',
-    featured: true,
-    description:
-      'Cuando el Servicio Nacional de Migraciones observa una solicitud, el plazo para responder es acotado y una respuesta incompleta puede terminar en archivo o rechazo. Revisamos qué se está objetando exactamente y preparamos una respuesta fundada dentro de plazo.',
-    bullets: [
-      'Lectura y análisis de la observación notificada',
-      'Preparación de documentos faltantes o corregidos',
-      'Respuesta fundada dentro del plazo legal',
-      'Reactivación de trámites archivados cuando procede'
     ]
   },
   {
@@ -104,7 +108,7 @@ export const services = [
   },
   {
     id: 'amparo-y-expulsion',
-    icon: 'scale',
+    icon: 'route',
     title: 'Expulsión, abandono y amparo',
     short:
       'Defensa frente a órdenes de expulsión, órdenes de abandono y medidas que afectan tu libertad personal.',

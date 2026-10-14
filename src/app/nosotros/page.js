@@ -58,9 +58,9 @@ export default function NosotrosPage() {
                 value={metric.value}
                 prefix={metric.prefix}
                 suffix={metric.suffix}
-                className="block text-4xl font-extrabold tracking-tight text-brand md:text-5xl"
+                className="block text-4xl font-bold tracking-tight text-brand md:text-5xl"
               />
-              <span className="mt-2 block text-sm font-semibold text-slate-500">
+              <span className="mt-2 block text-sm font-semibold text-muted">
                 {metric.label}
               </span>
             </div>
@@ -83,8 +83,8 @@ export default function NosotrosPage() {
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white">
                   <Icon name={value.icon} className="h-6 w-6" />
                 </span>
-                <h3 className="mt-6 text-lg font-extrabold text-brand">{value.title}</h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
+                <h3 className="mt-6 text-lg font-bold text-brand">{value.title}</h3>
+                <p className="mt-3 text-[15px] leading-relaxed text-muted">
                   {value.description}
                 </p>
               </article>
@@ -110,7 +110,7 @@ export default function NosotrosPage() {
               >
                 {/* Marcador de posición para la fotografía del profesional */}
                 <div className="relative flex h-48 items-center justify-center bg-brand">
-                  <span className="text-4xl font-extrabold tracking-tight text-white/90">
+                  <span className="text-4xl font-bold tracking-tight text-white/90">
                     {initials(member.name)}
                   </span>
                   <svg
@@ -132,14 +132,14 @@ export default function NosotrosPage() {
                   </svg>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-base font-extrabold leading-snug text-brand">
+                  <h3 className="text-base font-bold leading-snug text-brand">
                     {member.name}
                   </h3>
-                  <p className="mt-1 text-xs font-bold uppercase tracking-[0.12em] text-accent">
+                  <p className="mt-1 text-sm font-semibold text-accentDark">
                     {member.role}
                   </p>
-                  <p className="mt-3 text-sm font-semibold text-slate-700">{member.focus}</p>
-                  <p className="mt-2 text-[13px] leading-relaxed text-slate-500">{member.detail}</p>
+                  <p className="mt-3 text-sm font-semibold text-ink">{member.focus}</p>
+                  <p className="mt-2 text-[13px] leading-relaxed text-muted">{member.detail}</p>
                 </div>
               </article>
             ))}
@@ -160,7 +160,7 @@ export default function NosotrosPage() {
               {commitments.map((commitment) => (
                 <li key={commitment} className="flex items-start gap-3">
                   <Icon name="check" className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                  <span className="text-[15px] leading-relaxed text-slate-700">{commitment}</span>
+                  <span className="text-[15px] leading-relaxed text-ink">{commitment}</span>
                 </li>
               ))}
             </ul>
@@ -173,10 +173,10 @@ export default function NosotrosPage() {
                   key={step.step}
                   className="flex gap-5 rounded-2xl border border-brand100 bg-white p-6"
                 >
-                  <span className="text-2xl font-extrabold text-accent">{step.step}</span>
+                  <span className="text-2xl font-bold text-accent">{step.step}</span>
                   <div>
-                    <h3 className="text-lg font-extrabold text-brand">{step.title}</h3>
-                    <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
+                    <h3 className="text-lg font-bold text-brand">{step.title}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted">
                       {step.description}
                     </p>
                   </div>
@@ -201,8 +201,8 @@ export default function NosotrosPage() {
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
                   <Icon name="pin" className="h-5 w-5" />
                 </span>
-                <h3 className="mt-5 text-base font-extrabold text-brand">{office.city}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{office.detail}</p>
+                <h3 className="mt-5 text-base font-bold text-brand">{office.city}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{office.detail}</p>
               </article>
             ))}
           </div>
