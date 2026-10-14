@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iniciachile
+  namespace: apptec
+  labels:
+    app: iniciachile
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iniciachile
+  template:
+    metadata:
+      labels:
+        app: iniciachile
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      containers:
+        - name: iniciachile
+          # Jenkins reemplaza este valor por la imagen versionada antes del apply.
+          image: iniciachile:bootstrap
+          ports:
+            - name: node
+              containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: production
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              memory: 1Gi
+          startupProbe:
+            httpGet:
+              path: /
+              port: node
+            periodSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: node
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: node
+            periodSeconds: 20

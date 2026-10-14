@@ -1,0 +1,11 @@
+.git
+.claude
+node_modules
+.next
+out
+build
+.DS_Store
+.env*
+*.pem
+npm-debug.log*
+deployment-rendered.yaml
