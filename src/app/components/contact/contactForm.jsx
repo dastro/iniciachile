@@ -10,8 +10,31 @@ const fieldClass =
   'mt-2 w-full rounded-xl border border-brand100 bg-white px-3.5 py-2.5 text-[15px] text-ink outline-none transition-colors placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/20'
 const errorClass = 'mt-1.5 block text-xs font-semibold text-red-600'
 
-const Field = ({ label, required, error, children }) => (
-  <div>
+/** Qué conviene contar según el trámite elegido: guía el texto libre de la descripción. */
+const messageHints = {
+  'Residencia temporal':
+    'Cuéntanos desde cuándo estás en Chile, cómo ingresaste y si tienes contrato, estudios o familia acá.',
+  'Permanencia definitiva':
+    'Cuéntanos cuándo obtuviste tu residencia temporal, cuánto tiempo has estado fuera de Chile y si tienes antecedentes pendientes.',
+  'Regularización migratoria':
+    'Cuéntanos cómo y cuándo ingresaste a Chile, qué permiso tuviste y desde cuándo está vencido.',
+  Nacionalización:
+    'Cuéntanos desde cuándo tienes permanencia definitiva y si has salido de Chile por períodos largos.',
+  'Reunificación familiar':
+    'Cuéntanos qué familiar quieres traer o regularizar, su parentesco y en qué país está hoy.',
+  'Cambio de categoría migratoria':
+    'Cuéntanos qué permiso tienes hoy y por qué necesitas cambiarlo (trabajo, estudios, familia).',
+  'Permiso para trabajar':
+    'Cuéntanos tu situación actual y si ya tienes una oferta o contrato de trabajo.',
+  'Demora en mi trámite':
+    'Cuéntanos qué trámite ingresaste, en qué fecha y si has recibido alguna notificación desde entonces.',
+  'Rechazo, recurso o expulsión':
+    'Cuéntanos qué resolución recibiste, en qué fecha te la notificaron y si ya presentaste algún recurso.',
+  Otro: 'Cuéntanos desde cuándo estás en Chile, qué permiso tienes o tuviste, y qué necesitas resolver.'
+}
+
+const Field = ({ label, required, error, children, className = '' }) => (
+  <div className={className}>
     <label className={labelClass}>
       {label} {required && <span className="text-accent">*</span>}
     </label>
@@ -29,14 +52,33 @@ const Fieldset = ({ title, children }) => (
   </fieldset>
 )
 
+const Select = ({ options, ...rest }) => (
+  <select className={fieldClass} defaultValue="" {...rest}>
+    <option value="" disabled>
+      Selecciona una opción
+    </option>
+    {options.map((option) => (
+      <option key={option}>{option}</option>
+    ))}
+  </select>
+)
+
+/**
+ * Formulario de una sola página. Se pregunta primero por la situación y el caso
+ * (lo que la persona quiere contar) y los datos de contacto al final.
+ */
 export const ContactForm = ({ source = 'general' }) => {
   const [status, setStatus] = useState('idle') // idle | sending | success | error
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors }
   } = useForm()
+
+  const necesidad = watch('necesidad')
+  const situacion = watch('situacion')
 
   const onSubmit = async (data) => {
     setStatus('sending')
@@ -78,13 +120,76 @@ export const ContactForm = ({ source = 'general' }) => {
       noValidate
       className="space-y-6 rounded-2xl border border-brand100 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,37,68,0.5)] md:p-8"
     >
-      <Fieldset title="Datos personales">
+      <Fieldset title="Tu situación">
+        <Field label="Situación migratoria actual" required error={errors.situacion}>
+          <Select
+            options={migratoryStatuses}
+            {...register('situacion', { required: 'Selecciona una opción' })}
+          />
+          {situacion === 'No lo sé' && (
+            <span className="mt-1.5 block text-xs leading-relaxed text-muted">
+              No te preocupes: con lo que nos cuentes en la descripción podemos determinarlo.
+            </span>
+          )}
+        </Field>
+
+        <Field label="Trámite o necesidad principal" required error={errors.necesidad}>
+          <Select
+            options={needs}
+            {...register('necesidad', { required: 'Selecciona una opción' })}
+          />
+        </Field>
+
+        <Field label="Nivel de urgencia" required error={errors.urgencia}>
+          <Select
+            options={urgencies}
+            {...register('urgencia', { required: 'Selecciona una opción' })}
+          />
+        </Field>
+
+        <Field label="País donde te encuentras" required error={errors.pais}>
+          <input
+            type="text"
+            className={fieldClass}
+            placeholder="Ej: Chile"
+            {...register('pais', { required: 'Indícanos dónde te encuentras' })}
+          />
+        </Field>
+
+        <Field
+          label="Breve descripción de tu situación"
+          required
+          error={errors.mensaje}
+          className="md:col-span-2"
+        >
+          <textarea
+            rows={4}
+            className={`${fieldClass} resize-y`}
+            placeholder={messageHints[necesidad] || messageHints.Otro}
+            {...register('mensaje', {
+              required: 'Descríbenos brevemente tu situación',
+              minLength: { value: 20, message: 'Cuéntanos un poco más para poder orientarte' }
+            })}
+          />
+        </Field>
+      </Fieldset>
+
+      <Fieldset title="Tus datos de contacto">
         <Field label="Nombre completo" required error={errors.nombre}>
           <input
             type="text"
             className={fieldClass}
             placeholder="Nombre y apellidos"
             {...register('nombre', { required: 'Indícanos tu nombre' })}
+          />
+        </Field>
+
+        <Field label="Nacionalidad" required error={errors.nacionalidad}>
+          <input
+            type="text"
+            className={fieldClass}
+            placeholder="Ej: venezolana"
+            {...register('nacionalidad', { required: 'Indícanos tu nacionalidad' })}
           />
         </Field>
 
@@ -114,87 +219,6 @@ export const ContactForm = ({ source = 'general' }) => {
             })}
           />
         </Field>
-
-        <Field label="Nacionalidad" required error={errors.nacionalidad}>
-          <input
-            type="text"
-            className={fieldClass}
-            placeholder="Ej: venezolana"
-            {...register('nacionalidad', { required: 'Indícanos tu nacionalidad' })}
-          />
-        </Field>
-
-        <Field label="País donde te encuentras" required error={errors.pais}>
-          <input
-            type="text"
-            className={fieldClass}
-            placeholder="Ej: Chile"
-            {...register('pais', { required: 'Indícanos dónde te encuentras' })}
-          />
-        </Field>
-      </Fieldset>
-
-      <Fieldset title="Situación migratoria">
-        <Field label="Situación migratoria actual" required error={errors.situacion}>
-          <select
-            className={fieldClass}
-            defaultValue=""
-            {...register('situacion', { required: 'Selecciona una opción' })}
-          >
-            <option value="" disabled>
-              Selecciona una opción
-            </option>
-            {migratoryStatuses.map((option) => (
-              <option key={option}>{option}</option>
-            ))}
-          </select>
-        </Field>
-
-        <Field label="Trámite o necesidad principal" required error={errors.necesidad}>
-          <select
-            className={fieldClass}
-            defaultValue=""
-            {...register('necesidad', { required: 'Selecciona una opción' })}
-          >
-            <option value="" disabled>
-              Selecciona una opción
-            </option>
-            {needs.map((option) => (
-              <option key={option}>{option}</option>
-            ))}
-          </select>
-        </Field>
-
-        <Field label="Nivel de urgencia" required error={errors.urgencia}>
-          <select
-            className={fieldClass}
-            defaultValue=""
-            {...register('urgencia', { required: 'Selecciona una opción' })}
-          >
-            <option value="" disabled>
-              Selecciona una opción
-            </option>
-            {urgencies.map((option) => (
-              <option key={option}>{option}</option>
-            ))}
-          </select>
-        </Field>
-      </Fieldset>
-
-      <Fieldset title="Descripción del caso">
-        <div className="md:col-span-2">
-          <Field label="Breve descripción de tu situación" required error={errors.mensaje}>
-            <textarea
-              rows={4}
-              className={`${fieldClass} resize-y`}
-              placeholder="Cuéntanos desde cuándo estás en Chile, qué permiso tienes o tuviste, y qué necesitas resolver."
-              {...register('mensaje', {
-                required: 'Descríbenos brevemente tu situación',
-                minLength: { value: 20, message: 'Cuéntanos un poco más para poder orientarte' }
-              })}
-            />
-          </Field>
-        </div>
       </Fieldset>
 
       <div className="space-y-3">

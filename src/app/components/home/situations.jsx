@@ -33,7 +33,7 @@ export const Situations = () => (
       <div className="relative mt-12 overflow-hidden rounded-3xl bg-sand md:mt-14">
         <div className="relative aspect-[16/10] w-full md:absolute md:inset-y-0 md:right-0 md:aspect-auto md:w-[58%]">
           <Image
-            src="/images/refresh/madre-hija.jpg"
+            src="/images/refresh/madre-hija-2.jpg"
             alt="Madre e hija abrazadas, con una carpeta de documentos, mirando hacia adelante"
             fill
             sizes="(min-width: 768px) 58vw, 100vw"

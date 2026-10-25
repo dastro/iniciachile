@@ -21,7 +21,7 @@ const slides = [
     subtitle:
       'La ley fija plazos al Estado. Revisamos el estado real de tu solicitud y las vías para exigir un pronunciamiento.',
     image: {
-      src: '/images/refresh/hero-madre-hijo.jpg',
+      src: '/images/refresh/hero-madre-hijo-2.jpg',
       alt: 'Madre e hijo adolescente sonriendo mientras caminan juntos frente a un edificio de servicios, con documentos en la mano',
       position: 'object-[96%_30%]'
     }
@@ -39,8 +39,8 @@ const slides = [
 ]
 
 const headlineClass =
-  'mt-6 text-[34px] font-extrabold leading-[1.1] tracking-[-0.03em] text-brand sm:text-[42px] lg:text-[44px] xl:text-[52px]'
-const subtitleClass = 'mt-5 max-w-xl text-[17px] leading-relaxed text-muted md:text-xl'
+  'mt-6 text-[34px] font-extrabold leading-[1.1] tracking-[-0.03em] text-white sm:text-[42px] md:text-brand lg:text-[44px] xl:text-[52px]'
+const subtitleClass = 'mt-5 max-w-xl text-[17px] leading-relaxed text-white/85 md:text-xl md:text-muted'
 
 export const Hero = () => {
   const [current, setCurrent] = useState(0)
@@ -54,9 +54,11 @@ export const Hero = () => {
 
   return (
     <section className="relative isolate overflow-hidden bg-cream">
-      <div className="container-site pb-24 pt-32 md:pt-40 xl:pb-32">
+      <div className="container-site pb-16 pt-32 md:pb-24 md:pt-40 xl:pb-32">
         <div className="relative z-10 xl:max-w-[600px]">
-          <div className="eyebrow">Estudio jurídico migratorio</div>
+          <div className="eyebrow max-md:text-accentLight max-md:before:bg-accentLight">
+            Estudio jurídico migratorio
+          </div>
 
           {/* Los tres mensajes comparten celda: se reserva la altura del más largo y nada salta al rotar */}
           <div className="grid">
@@ -84,17 +86,12 @@ export const Hero = () => {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-outline-dark px-8 py-4"
+              className="btn-outline-dark px-8 py-4 max-md:border-white max-md:text-white max-md:hover:bg-white max-md:hover:text-brand"
             >
               <Icon name="whatsapp" className="h-5 w-5" />
               Hablar por WhatsApp
             </a>
           </div>
-
-          <p className="mt-6 max-w-lg text-[13px] leading-relaxed text-muted">
-            La evaluación identifica opciones y riesgos según tus antecedentes. No garantiza
-            aprobación ni resultado migratorio.
-          </p>
 
           {/* Indicadores del carrusel de titulares */}
           <div className="mt-8 flex items-center gap-2.5">
@@ -106,15 +103,20 @@ export const Hero = () => {
                 aria-label={`Ver mensaje ${index + 1}`}
                 aria-current={current === index}
                 className={`h-1.5 rounded-full transition-all duration-500 ${
-                  current === index ? 'w-10 bg-accent' : 'w-5 bg-brand200 hover:bg-brand'
+                  current === index
+                    ? 'w-10 bg-accent'
+                    : 'w-5 bg-white/40 hover:bg-white md:bg-brand200 md:hover:bg-brand'
                 }`}
               />
             ))}
           </div>
         </div>
 
-        {/* Fotografía: a sangre a la derecha en escritorio, bajo el mensaje en móvil y tablet */}
-        <figure className="relative -mx-5 mt-10 aspect-[4/3] overflow-hidden sm:mx-0 sm:aspect-[16/9] sm:rounded-3xl xl:absolute xl:inset-y-0 xl:right-0 xl:mx-0 xl:mt-0 xl:aspect-auto xl:w-[52%] xl:rounded-none 2xl:w-[46%]">
+        {/*
+          Fotografía: en móvil es el fondo del hero, con overlay para que el texto se lea;
+          en tablet va bajo el mensaje y en escritorio a sangre a la derecha.
+        */}
+        <figure className="absolute inset-0 overflow-hidden md:relative md:inset-auto md:mt-10 md:aspect-[16/9] md:rounded-3xl xl:absolute xl:inset-y-0 xl:right-0 xl:mx-0 xl:mt-0 xl:aspect-auto xl:w-[52%] xl:rounded-none 2xl:w-[46%]">
           {/* Una fotografía por mensaje: todas apiladas, cambian con el mismo estado que el titular */}
           {slides.map((slide, index) => (
             <Image
@@ -131,9 +133,14 @@ export const Hero = () => {
               }`}
             />
           ))}
+          {/* Overlay sólo en móvil: oscurece la foto para el texto blanco */}
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-cream to-transparent xl:hidden"
+            className="absolute inset-0 bg-gradient-to-b from-brandDeep/75 via-brandDeep/55 to-brandDeep/85 md:hidden"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 hidden h-20 bg-gradient-to-b from-cream to-transparent md:block xl:hidden"
           />
           <div
             aria-hidden="true"

@@ -66,8 +66,9 @@ export const Navbar = () => {
     <nav
       className={`fixed top-0 z-[80] w-full transition-all duration-300 ${
         transparent
-          ? 'bg-transparent py-2'
-          : 'border-b border-brand100/70 bg-cream/95 py-1 shadow-[0_8px_24px_-20px_rgba(15,37,68,0.35)] backdrop-blur'
+          ? // En móvil la foto de la home va de fondo con overlay oscuro: ahí la barra no puede ser transparente
+            `bg-transparent py-2 ${pathname === '/' ? 'max-md:bg-cream/95 max-md:backdrop-blur' : ''}`
+          :'border-b border-brand100/70 bg-cream/95 py-1 shadow-[0_8px_24px_-20px_rgba(15,37,68,0.35)] backdrop-blur'
       }`}
     >
       <div className="container-site flex items-center justify-between py-3">

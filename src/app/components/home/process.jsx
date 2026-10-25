@@ -14,7 +14,7 @@ export const Process = () => (
       <div className="mt-14 grid items-center gap-12 lg:mt-16 lg:grid-cols-12 lg:gap-16">
         <figure className="relative aspect-[16/11] overflow-hidden rounded-3xl shadow-[0_28px_60px_-34px_rgba(15,37,68,0.4)] sm:aspect-[16/9] lg:col-span-5 lg:aspect-[4/5]">
           <Image
-            src="/images/refresh/padre-hijo.jpg"
+            src="/images/refresh/padre-hijo-2.jpg"
             alt="Padre e hijo sonriendo mientras revisan juntos una carpeta de documentos en un paradero"
             fill
             sizes="(min-width: 1024px) 42vw, 100vw"
