@@ -124,86 +124,12 @@ article[id] {
   mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
 }
 
-/* --- Legado: sólo lo usa la página de exploración /opciones-header --- */
-
-/* Malla sutil sobre fondos azules profundos */
-.grid-overlay {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-  background-size: 56px 56px;
-}
-
-.cta-sheen {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.hero-grid-drift {
-  animation: gridDrift 26s linear infinite;
-}
-
-@keyframes gridDrift {
-  0% {
-    background-position:
-      0 0,
-      0 0;
-  }
-  100% {
-    background-position:
-      56px 56px,
-      56px 56px;
-  }
-}
-
-.hero-halo {
-  animation: haloFloat 14s ease-in-out infinite;
-}
-
-.hero-halo-delayed {
-  animation-delay: -7s;
-}
-
-@keyframes haloFloat {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.85;
-  }
-  50% {
-    transform: translate3d(24px, -28px, 0) scale(1.12);
-    opacity: 1;
-  }
-}
-
-.isotype-draw {
-  stroke-dasharray: 60;
-  animation: isotypeDraw 9s ease-in-out infinite;
-}
-
-@keyframes isotypeDraw {
-  0% {
-    stroke-dashoffset: 60;
-  }
-  35%,
-  75% {
-    stroke-dashoffset: 0;
-  }
-  100% {
-    stroke-dashoffset: -60;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .animate-floatSlow,
   .animate-fadeIn,
   .animate-fadeInUp,
   .animate-fadeSoft,
-  .animate-marquee,
-  .hero-grid-drift,
-  .hero-halo,
-  .isotype-draw {
+  .animate-marquee {
     animation: none !important;
   }
   html {

@@ -34,14 +34,6 @@ export const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURICompo
   site.whatsappMessage
 )}`
 
-export const navLinks = [
-  { label: 'Inicio', href: '/' },
-  { label: 'Servicios', href: '/servicios' },
-  { label: 'Regularización', href: '/regularizacion' },
-  { label: 'Nosotros', href: '/nosotros' },
-  { label: 'Contacto', href: '/contacto' }
-]
-
 /** ⚠️ MOCK DATA — cifras inventadas. Ajústalas a métricas reales y respaldables. */
 export const metrics = [
   { value: 12, suffix: '+', label: 'Años en derecho migratorio' },

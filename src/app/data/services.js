@@ -154,5 +154,3 @@ export const services = [
 ]
 
 export const featuredServices = services.filter((service) => service.featured)
-
-export const getService = (id) => services.find((service) => service.id === id)

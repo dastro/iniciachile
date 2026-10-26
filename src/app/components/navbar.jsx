@@ -31,7 +31,7 @@ export const Navbar = () => {
 
   // Sólo la home (y la landing de regularización) tienen hero a sangre, así que sólo ahí la navbar arranca transparente.
   const overHero =
-    pathname === '/' || pathname === '/regularizacion' || pathname === '/opciones-header'
+    pathname === '/' || pathname === '/regularizacion'
   const transparent = overHero && !scrolled && !menuOpen
 
   useEffect(() => {
